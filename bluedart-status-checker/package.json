@@ -1,0 +1,20 @@
+{
+  "name": "bluedart-updates-checker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^2.7.0",
+    "node-notifier": "^10.0.1"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
