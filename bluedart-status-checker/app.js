@@ -35,6 +35,13 @@ async function getLatestStatus() {
 async function checkForUpdates() {
   const latestStatus = await getLatestStatus();
 
+  // check valid latestStatus object
+  if(latestStatus.date === '' || latestStatus.details === '' || latestStatus.time === '' || latestStatus.location ===''){
+    console.error(`Invalid latestStatus object recieved at: ${new Date().toLocaleTimeString()}\n`);
+    console.log(latestStatus);
+    return;
+  }
+
   if (latestStatus && latestStatus.time !== previousTime) {
     console.log('New Update at:', new Date().toLocaleTimeString());
     console.log(latestStatus);
