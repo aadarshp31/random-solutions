@@ -15,6 +15,19 @@
       "program": "${workspaceFolder}/bluedart-status-checker/app.js",
       "envFile": "${workspaceFolder}/bluedart-status-checker/.env",
       "console": "internalConsole"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Github Contribution Checker",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "cwd": "${workspaceFolder}/github-contribution-checker",
+      "envFile": "${workspaceFolder}/github-contribution-checker/.env",
+      "console": "internalConsole"
     }
   ]
 }
