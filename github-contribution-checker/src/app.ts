@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import GithubAPI from './helpers/GithubAPI';
 import notifier from 'node-notifier';
+const fetch = require('node-fetch');
+import FormData from 'form-data';
 
 dotenv.config();
 
@@ -43,6 +45,7 @@ dotenv.config();
   const eventType: 'PushEvent' | 'CreateEvent' | 'WatchEvent' = contribution.type;
 
   let infoMessage = '';
+
   switch (eventType) {
     case 'PushEvent':
     case 'CreateEvent':
@@ -73,6 +76,30 @@ dotenv.config();
         wait: true, // Wait with callback, until user action is taken against notification,
         timeout: 300000,
       });
+
+      // notify user via email on failure to contribute today
+      const formData = new FormData();
+      formData.append('name', 'Gitub Contribution Update');
+      formData.append('subject', 'Gitub Contribution Update');
+      // @ts-ignore
+      formData.append('email', process.env.TEST_EMAIL);
+      formData.append('message', infoMessage);
+
+      // @ts-ignore
+      const res = await fetch(process.env.EMAIL_NOTIFICATION_URL, {
+        method: 'POST',
+        body: formData
+      });
+
+      switch (res.status) {
+        case 200:
+          console.log('Notified via email');
+          break;
+
+        default:
+          console.error('failed to send email', res.status);
+          break;
+      }
       break;
 
     default:
