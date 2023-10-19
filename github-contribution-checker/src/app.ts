@@ -6,12 +6,13 @@ import FormData from 'form-data';
 
 dotenv.config();
 
-(async () => {
-  const interval = setInterval(() => {
-    checkContributionAndNotify();
-    // @ts-ignore
-  }, process.env.CHECK_INTERVAL)
-})
+let count = 0;
+setInterval(() => {
+  checkContributionAndNotify();
+  count++;
+  console.info(`Running task Count: ${count}`);
+  // @ts-ignore
+}, process.env.CHECK_INTERVAL);
 
 async function checkContributionAndNotify() {
   // @ts-ignore
