@@ -7,6 +7,13 @@ import FormData from 'form-data';
 dotenv.config();
 
 (async () => {
+  const interval = setInterval(() => {
+    checkContributionAndNotify();
+    // @ts-ignore
+  }, process.env.CHECK_INTERVAL)
+})
+
+async function checkContributionAndNotify() {
   // @ts-ignore
   const contributions = await GithubAPI.getContributionsForUser(process.env.USERNAME);
 
@@ -115,4 +122,4 @@ dotenv.config();
       });
       break;
   }
-})();
+}
