@@ -5,8 +5,12 @@ const fetch = require('node-fetch');
 import FormData from 'form-data';
 
 dotenv.config();
-
 let count = 0;
+
+checkContributionAndNotify();
+count++;
+console.info(`Running task Count: ${count}`);
+
 setInterval(() => {
   checkContributionAndNotify();
   count++;
@@ -61,7 +65,7 @@ async function checkContributionAndNotify() {
       const CurrentDate = new Date().toDateString();
 
       if (latestCommitDate === CurrentDate) {
-        infoMessage = `Already Contributed today!\nLast contribution done on: ${new Date(contribution.created_at).toLocaleString()}`;
+        infoMessage = `Already Contributed today!\nLast contribution done on: ${new Date(contribution.created_at).toLocaleDateString()}`;
         console.info(infoMessage);
         // notify the user via system notification
         notifier.notify({
@@ -74,7 +78,7 @@ async function checkContributionAndNotify() {
         return;
       }
 
-      infoMessage = `You've yet not contributed today on Github.\nLast contribution done on: ${new Date(contribution.created_at).toLocaleString()}`;
+      infoMessage = `You've yet not contributed today on Github.\nLast contribution done on: ${new Date(contribution.created_at).toLocaleDateString()}`;
       console.warn(infoMessage);
       // notify the user via system notification
       notifier.notify({
