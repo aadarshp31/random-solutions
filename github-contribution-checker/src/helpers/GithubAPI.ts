@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 export default class GithubAPI {
-  private static _token: string | undefined = process.env.GITHUB_API_KEY;
-
   private constructor() { }
 
   public static async getContributionsForUser(username: string): Promise<any> {
@@ -10,7 +8,7 @@ export default class GithubAPI {
       // get any commits made by a user
       const response = await axios(`https://api.github.com/users/${username}/events`, {
         headers: {
-          Authorization: `token ${GithubAPI._token}`
+          Authorization: `token ${process.env.GITHUB_API_KEY}`
         }
       });
 
