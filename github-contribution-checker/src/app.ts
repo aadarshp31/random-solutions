@@ -3,6 +3,7 @@ import GithubAPI from './helpers/GithubAPI';
 import notifier from 'node-notifier';
 const fetch = require('node-fetch');
 import FormData from 'form-data';
+import app from './server';
 
 dotenv.config();
 let count = 0;
@@ -128,3 +129,7 @@ async function checkContributionAndNotify() {
       break;
   }
 }
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port: ${process.env.PORT}`);
+});
